@@ -1,5 +1,6 @@
 import pygame
 from Colors import *
+from Battlefield import *
 
 
 # pygame setup
@@ -18,10 +19,10 @@ clock = pygame.time.Clock()
 running = True
 
 # playing_feld
-playing_field_x_pos = 30
-playing_field_y_pos = 10
-playing_field_width = screen_width/2 - playing_field_x_pos
-playing_field_height = playing_field_width * 2
+playing_field_x_pos = 40
+playing_field_y_pos = 40
+playing_field_width = 250
+playing_field_height = 500
 
 def playing_field():
     pygame.draw.rect(screen,PLAYING_FIELD, (playing_field_x_pos,playing_field_y_pos,playing_field_width,playing_field_height),0,0,0,0,0)
@@ -67,15 +68,25 @@ class Wall():
         # Brickwork
         stone_size_x = 6
         stone_size_y = 3
-        half_stone_size_x = stone_size_x / 2
-        half_stone_size_y = stone_size_y
 
-         # Brick loop
-        for row in range(135):
-            for column in range(4):
+
+    def brick(self,screen, x_pos): # Brick loop
+        # Brickwork
+        stone_size_x = 6
+        stone_size_y = 3
+
+        for row in range(125):
+            for column in range(3):
                 if row % 2 == 0:
-                    x =  column * (stone_size_x + 1)+ 20
+                    x =  column * (stone_size_x + 1)+ x_pos + 1
                 else:
-                    x = (column) * (stone_size_x + 1)+ 23
-                y = row * (stone_size_y + 1) + 10
+                    x = (column) * (stone_size_x + 1)+ x_pos -2
+                y = row * (stone_size_y + 1) + playing_field_y_pos
                 pygame.draw.rect(screen, STONES, (x, y, stone_size_x, stone_size_y))
+
+
+
+
+
+
+

@@ -20,8 +20,6 @@ game_painter = Game_Painter(playing_field_width, playing_field_x_pos, playing_fi
 #initalize Battelfield
 battlefield = Battlefield()
 
-battlefield.make_move(1,3)
-
 
 while running:
     # poll for events
@@ -32,7 +30,7 @@ while running:
 
        
     # game_logik
-
+    battlefield.make_move()
 
     # fill the screen with a color to wipe away anything from last frame
     screen.fill(HINTERGRUND)
@@ -73,7 +71,7 @@ while running:
 # flip() the display to put your work on screen
     pygame.display.flip()
 
-    clock.tick(60)  # limits FPS to 60
+    clock.tick(1)  # limits FPS to 60
 
 pygame.quit()
 

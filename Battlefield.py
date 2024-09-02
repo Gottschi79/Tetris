@@ -35,6 +35,7 @@ class Battlefield():
                       [0,0,0,0,0,0,0,0,0,0], #18
                       [0,0,0,0,0,0,0,0,0,0]] #19
 
+
         self.pieces = [Battlefield.Orange_Ricky,
                         Battlefield.Blue_Ricky,
                         Battlefield.Cleveland_Z,
@@ -46,38 +47,43 @@ class Battlefield():
         # Zufällig einen Stein auswählen
         self.selected_piece = random.choice(self.pieces)
 
-        self.current_row = 0
-        self.current_column = 4  # Beginnt in der Mitte des Spielfelds
+        self.current_position = [4, 0]
+
+    def clear_previous_position(self):
+        """Setzt die aktuelle Position des Spielsteins im Spielfeld auf 0."""
+        x, y = self.current_position
+        self.state[y][x] = 0
 
     def make_move(self):
+        # Zunächst die aktuelle Position löschen
+        self.clear_previous_position()
 
-        # Stück bewegt sich standardmäßig nach unten
+        # Bewegung des Steins nach Benutzereingabe
         keys = pygame.key.get_pressed()
-
         if keys[pygame.K_DOWN]:
-            self.current_row += 5
+            self.current_position[1] += 3  # Nach unten bewegen
         else:
-            self.current_row += 1
-
+            self.current_position[1] += 1  # Nach unten bewegen
         if keys[pygame.K_LEFT]:
-            self.current_column -= 5
+            self.current_position[0] -= 1  # Nach links bewegen
         elif keys[pygame.K_RIGHT]:
-            self.current_column += 5
+            self.current_position[0] += 1  # Nach rechts bewegen
 
-        # Überprüfen, ob das Stück den unteren Rand des Spielfelds erreicht hat
-        if self.current_row >= len(self.state):
-            self.current_row = len(self.state) - 1
+        # Grenzen des Spielfelds überprüfen
+        if self.current_position[1] >= len(self.state):
+            self.current_position[1] = len(self.state) - 1
+        if self.current_position[0] < 0:
+            self.current_position[0] = 0
+        elif self.current_position[0] >= len(self.state[0]):
+            self.current_position[0] = len(self.state[0]) - 1
 
-        # Überprüfen, ob das Stück den linken oder rechten Rand des Spielfelds erreicht hat
-        if self.current_column < 0:
-            self.current_column = 0
-        elif self.current_column >= len(self.state[0]):
-            self.current_column = len(self.state[0]) - 1
+        # Setze die neue Position des Spielsteins
+        x, y = self.current_position
+        self.state[y][x] = self.selected_piece
 
-        # Setze den ausgewählten Stein in das Spielfeld
-        self.state[self.current_row][self.current_column] = self.selected_piece
-
-
+        # Zum Debuggen: aktuellen Zustand des Spielfelds drucken
+        for row in self.state:
+            print(row)
 
 
 

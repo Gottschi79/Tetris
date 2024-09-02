@@ -28,12 +28,11 @@ while running:
         if event.type == pygame.QUIT:
             running = False
 
+    # fill the screen with a color to wipe away anything from last frame
+    screen.fill(HINTERGRUND)
        
     # game_logik
     battlefield.make_move()
-
-    # fill the screen with a color to wipe away anything from last frame
-    screen.fill(HINTERGRUND)
 
 # RENDER YOUR GAME HERE
 
@@ -71,7 +70,7 @@ while running:
 # flip() the display to put your work on screen
     pygame.display.flip()
 
-    clock.tick(1)  # limits FPS to 60
+    clock.tick(2)  # limits FPS to 60
 
 pygame.quit()
 

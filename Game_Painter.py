@@ -20,27 +20,30 @@ class Game_Painter():
                 pygame.draw.rect(screen, PLAYING_FIELD, (x, y, self.SQUARE_SIZE, self.SQUARE_SIZE),1)
 
     # Gibt den aktuellen Status des Spiels wieder
-    def draw_battlefield_state(self, screen,  battlefield_state):
-        square_size = self.SQUARE_SIZE
-        for row in range(20):
-            for column in range(10):
-                piece = battlefield_state[row][column]
-                x = (column * square_size) + self.playing_field_x_pos
-                y = (row * square_size) + self.playing_field_y_pos
-                if piece == Battlefield.Orange_Ricky:
-                    ORANGE_RICKY(screen, x, y, square_size)
-                elif piece == Battlefield.Blue_Ricky:
-                    BLUE_RICKY(screen, x, y, square_size)
-                elif piece == Battlefield.Cleveland_Z:
-                    CLEVELAND_Z(screen, x, y, square_size)
-                elif piece == Battlefield.Rhode_Island_Z:
-                    RHODE_ISLAND_Z(screen, x, y, square_size)
-                elif piece == Battlefield.Hero:
-                    HERO(screen, x, y, square_size)
-                elif piece == Battlefield.Smashboy:
-                    SMASHBOY(screen, x, y, square_size)
-                elif piece == Battlefield.Teewee:
-                    TEEWEE(screen, x, y, square_size)
+    def draw_battlefield_state(self, screen, battlefield_state):
+        for row in range(len(battlefield_state)):  # Gehe durch die Zeilen
+            for column in range(len(battlefield_state[row])):  # Gehe durch die Spalten
+                value = battlefield_state[row][column]  # Den Wert an der Position (row, column) holen
+
+                if value != 0:  # Nur gezeichnet, wenn der Wert nicht 0 ist
+                    x = column * self.SQUARE_SIZE + self.playing_field_x_pos
+                    y = row * self.SQUARE_SIZE + self.playing_field_y_pos
+
+                    # Farbe basierend auf dem Wert zuweisen
+                    if value == 1:
+                        pygame.draw.rect(screen, ORANGE, (x, y, self.SQUARE_SIZE, self.SQUARE_SIZE))
+                    elif value == 2:
+                        pygame.draw.rect(screen, BLAU, (x, y, self.SQUARE_SIZE, self.SQUARE_SIZE))
+                    elif value == 3:
+                        pygame.draw.rect(screen, ROT, (x, y, self.SQUARE_SIZE, self.SQUARE_SIZE))
+                    elif value == 4:
+                        pygame.draw.rect(screen, GRUEN, (x, y, self.SQUARE_SIZE, self.SQUARE_SIZE))
+                    elif value == 5:
+                        pygame.draw.rect(screen, HELLBLAU, (x, y, self.SQUARE_SIZE, self.SQUARE_SIZE))
+                    elif value == 6:
+                        pygame.draw.rect(screen, GELB, (x, y, self.SQUARE_SIZE, self.SQUARE_SIZE))
+                    elif value == 7:
+                        pygame.draw.rect(screen, LILA, (x, y, self.SQUARE_SIZE, self.SQUARE_SIZE))
 
 
 
